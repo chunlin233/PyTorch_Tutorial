@@ -3,7 +3,8 @@
     将cifar10的data_batch_12345 转换成 png格式的图片
     每个类别单独存放在一个文件夹，文件夹名称为0-9
 """
-from scipy.misc import imsave
+# from scipy.misc import imsave
+import imageio
 import numpy as np
 import os
 import pickle
@@ -44,7 +45,7 @@ if __name__ == '__main__':
 
                 img_name = label_num + '_' + str(i + (j - 1)*10000) + '.png'
                 img_path = os.path.join(o_dir, img_name)
-                imsave(img_path, img)
+                imageio.imsave(img_path, img)
             print(data_path + " loaded.")
 
     print("test_batch is loading...")
@@ -62,6 +63,6 @@ if __name__ == '__main__':
 
         img_name = label_num + '_' + str(i) + '.png'
         img_path = os.path.join(o_dir, img_name)
-        imsave(img_path, img)
+        imageio.imsave(img_path, img)
 
     print("test_batch loaded.")

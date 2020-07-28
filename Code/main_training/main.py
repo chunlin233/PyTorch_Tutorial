@@ -179,9 +179,7 @@ for epoch in range(max_epoch):
 
             # 统计
             _, predicted = torch.max(outputs.data, 1)
-            # labels = labels.data    # Variable --> tensor
-
-            # 统计混淆矩阵
+            # label
             for j in range(len(labels)):
                 cate_i = labels[j].numpy()
                 pre_i = predicted[j].numpy()

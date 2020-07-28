@@ -23,6 +23,7 @@ print('\nloss_mean: ', loss_mean)
 
 # 熟悉计算公式，手动计算样本的第一个元素的loss，注意这里只有一个样本，是 element-wise计算的
 
+# 将output[0]从计算图中移出
 output = output[0].detach().numpy()
 output_1 = output[0]           # 第一个样本的第一个元素
 target_1 = target[0][0].numpy()

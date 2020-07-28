@@ -126,6 +126,7 @@ net.load_state_dict(net_state_dict)
 
 # 将fc3层的参数从原始网络参数中剔除
 ignored_params = list(map(id, net.fc3.parameters()))
+# 这里的map和filter的功能类似
 base_params = filter(lambda p: id(p) not in ignored_params, net.parameters())
 
 # 为fc3层设置需要的学习率
@@ -143,11 +144,14 @@ for epoch in range(max_epoch):
     loss_sigma = 0.0    # 记录一个epoch的loss之和
     correct = 0.0
     total = 0.0
-    scheduler.step()  # 更新学习率
+    scheduler.step()  # 每个epoch更新一次学习率
 
     for i, data in enumerate(train_loader):
         # 获取图片和标签
         inputs, labels = data
+        # 之所以需要将tensor转化成variable：
+        # pytorch中tensor(张量)只能放在CPU上运算
+        # 而(variable)变量是可以只用GPU进行加速计算的
         inputs, labels = Variable(inputs), Variable(labels)
 
         # forward, backward, update weights
